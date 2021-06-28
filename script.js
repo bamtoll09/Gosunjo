@@ -1,37 +1,44 @@
-window.onload = function() {
-	var animList = [];
-	var monitorImg = document.getElementsByClassName("monitorImg")[0];
-	var homeTextImg = document.getElementsByClassName("homeTextImg")[0];
-	var downArrow = document.getElementsByClassName("downArrow")[0];
-	
-	animList.push(monitorImg);
-	animList.push(homeTextImg);
-	animList.push(downArrow);
-	
-	for (var i=0; i<animList.length; ++i) {
-		animList[i].classList.add("loaded");
-	}
-	
-	downArrow.classList.add("arrowAnim");
-	
-	// Observer
-	let target = document.querySelector('.processContent');
-	let options = {
-	  rootMargin: '0px',
-	  threshold: 0.25
-	}
-	
-	let callback = (entries, observer) => {
-		entries.forEach(function(entry) {
-			if (entry.isIntersecting) {
-				for (var i=0; i<target.children[0].childElementCount; ++i) {
-					target.children[0].children[i].classList.add("loaded");
-				}
-			}
-		});
-	}
+var scrollpos = window.scrollY;
+var header = document.getElementById('header');
+var navcontent = document.getElementById('nav-content');
+var navaction = document.getElementById('navAction');
+var brandname = document.getElementById('brandname');
+var toToggle = document.querySelectorAll('.toggleColour');
 
-	let observer = new IntersectionObserver(callback, options);
-	observer.observe(target);
-}
+document.addEventListener('scroll', function () {
+	/*Apply classes for slide in bar*/
+	scrollpos = window.scrollY;
 
+	if (scrollpos > 10) {
+		header.classList.add('bg-white');
+		header.classList.remove('gradient');
+		navaction.classList.remove('bg-white');
+		navaction.classList.add('gradient');
+		navaction.classList.remove('text-gray-800');
+		navaction.classList.add('text-white');
+		//Use to switch toggleColour colours
+		for (var i = 0; i < toToggle.length; i++) {
+			toToggle[i].classList.add('text-gray-800');
+			toToggle[i].classList.remove('text-white');
+		}
+		header.classList.add('shadow');
+		// navcontent.classList.remove('bg-gray-100');
+		// navcontent.classList.add('bg-white');
+	} else {
+		header.classList.remove('bg-white');
+		header.classList.add('gradient');
+		navaction.classList.remove('gradient');
+		navaction.classList.add('bg-white');
+		navaction.classList.remove('text-white');
+		navaction.classList.add('text-gray-800');
+		//Use to switch toggleColour colours
+		for (var i = 0; i < toToggle.length; i++) {
+			toToggle[i].classList.add('text-white');
+			toToggle[i].classList.remove('text-gray-800');
+		}
+
+		header.classList.remove('shadow');
+		// navcontent.classList.remove('bg-white');
+		// navcontent.classList.add('bg-gray-100');
+	}
+});
