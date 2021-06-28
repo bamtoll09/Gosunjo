@@ -5,9 +5,13 @@ var navaction = document.getElementById('navAction');
 var brandname = document.getElementById('brandname');
 var toToggle = document.querySelectorAll('.toggleColour');
 
-document.addEventListener('scroll', function () {
+window.addEventListener('scroll', navColorChange);
+window.addEventListener('load', navColorChange);
+
+function navColorChange() {
 	/*Apply classes for slide in bar*/
 	scrollpos = window.scrollY;
+	console.log("scrollpos: " + scrollpos);
 
 	if (scrollpos > 10) {
 		header.classList.add('bg-white');
@@ -41,4 +45,4 @@ document.addEventListener('scroll', function () {
 		// navcontent.classList.remove('bg-white');
 		// navcontent.classList.add('bg-gray-100');
 	}
-});
+}
