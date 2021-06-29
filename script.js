@@ -6,7 +6,7 @@ var brandname = document.getElementById('brandname');
 var toToggle = document.querySelectorAll('.toggleColour');
 
 window.addEventListener('scroll', navColorChange);
-window.addEventListener('load', navColorChange);
+window.addEventListener('load', loading);
 
 function navColorChange() {
 	/*Apply classes for slide in bar*/
@@ -45,4 +45,29 @@ function navColorChange() {
 		// navcontent.classList.remove('bg-white');
 		// navcontent.classList.add('bg-gray-100');
 	}
+}
+
+function loading() {
+	navColorChange();
+	
+	// Observer
+	let target = document.querySelector('#process');
+	let steps = document.querySelector('#steps');
+	let options = {
+	  rootMargin: '0px',
+	  threshold: 0.1
+	}
+
+	let callback = (entries, observer) => {
+		entries.forEach(function(entry) {
+			if (entry.isIntersecting) {
+				for (var i=0; i<steps.childElementCount; ++i) {
+					steps.children[i].classList.add("loaded");
+				}
+			}
+		});
+	}
+
+	let observer = new IntersectionObserver(callback, options);
+	observer.observe(target);
 }

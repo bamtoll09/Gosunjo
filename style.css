@@ -1,3 +1,25 @@
 .gradient {
 	background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
 }
+
+.sf {
+	transition-delay: 0.25s;
+}
+.ss {
+	transition-delay: 0.5s;
+}
+.st {
+	transition-delay: 0.75s;
+}
+
+.step {
+	opacity: 0;
+	
+	transition-duration: 0.75s;
+	transform: translatey(-5rem);
+}
+
+.loaded {
+	opacity: 1;
+	transform: translatey(0rem);
+}
